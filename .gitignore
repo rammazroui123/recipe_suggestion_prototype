@@ -19,6 +19,38 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs
 hs_err_pid*
 replay_pid*
+
+# IDE Specific Files
+.idea/
+*.iml
+out/
+.classpath
+.project
+.settings/
+bin/
+nbproject/private/
+
+# Build Tool Directories
+target/
+build/
+.gradle/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*~
+
+# Dependency and Configuration Files
+*.properties
+*.config
+
+# Testing and Temporary Files
+test-output/
+*.tmp
+
+# Debugging Files
+*.dump
+
