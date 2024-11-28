@@ -1,4 +1,4 @@
-# recipe_suggestion_prototype
+# Recipe_Suggestion_Prototype
 
 **Smart Recipe Suggestion System**
 
