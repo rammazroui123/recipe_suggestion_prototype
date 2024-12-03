@@ -42,3 +42,58 @@ VALUES (
     20,
     4
 );
+
+CREATE TABLE UsageLogs (
+    log_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    ingredient_id INT REFERENCES ingredients(ingredients_id),
+    quantity_used INT NOT NULL,
+    used_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- sample 
+INSERT INTO UsageLogs (user_id, ingredient_id, quantity_used)
+VALUES (1, 2, 3);
+
+CREATE TABLE CustomRecipeSuggestions (
+    suggestion_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    recipe_id INT REFERENCES Recipes(recipe_id),
+    reason TEXT,
+    suggested_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+--sample
+INSERT INTO CustomRecipeSuggestions (user_id, recipe_id)
+VALUES (1, 1);
+--create table
+CREATE TABLE RecipeIngredients (
+    recipe_id INT REFERENCES Recipes(recipe_id),
+    ingredient_id INT REFERENCES ingredients(ingredients_id),
+    quantity_required INT NOT NULL,
+    PRIMARY KEY (recipe_id, ingredient_id)
+);
+--insert samples
+INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity_required)
+VALUES 
+    (1, 1, 2);
+	
+	
+-- ===============
+-- TEST QUERIES
+-- ===============
+	
+-- Retrieve all users
+SELECT * FROM Users;
+
+-- Retrieve ingredients
+SELECT ing.name AS ingredient_name, ri.quantity_required
+FROM ingredients AS ing
+JOIN RecipeIngredients AS ri ON ing.ingredients_id = ri.ingredient_id
+WHERE ri.recipe_id = 1;
+
+-- Retrieve recipes 
+SELECT rec.title AS recipe_title, rec.instructions AS recipe_steps
+FROM Recipes AS rec
+JOIN CustomRecipeSuggestions AS sugg ON rec.recipe_id = sugg.recipe_id
+WHERE sugg.user_id = 1;
+
