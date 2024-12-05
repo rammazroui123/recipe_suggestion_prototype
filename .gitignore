@@ -80,3 +80,6 @@ scripts/logs/
 
 # Node Modules (if front-end exists)
 node_modules/
+
+# Ignore Database Directory
+/database/
