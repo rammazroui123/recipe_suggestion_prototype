@@ -81,6 +81,7 @@ scripts/logs/
 
 # Node Modules (if front-end exists)
 node_modules/
+<<<<<<< HEAD
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -111,3 +112,7 @@ bin/
 ### Mac OS ###
 .DS_Store
  backend
+
+# Ignore Database Directory
+/database/
+ 0b1df6b8a7c23acb0442f5f75db264e750c0186f
