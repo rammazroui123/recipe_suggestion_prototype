@@ -23,7 +23,6 @@ CREATE TABLE Ingredients (
 INSERT INTO Ingredients (name, quantity, expiry_date, owner_id)
 VALUES ('Juice', 2, '2024-12-31', 1);
 
-
 --create  recipes table
 CREATE TABLE Recipes (
     recipe_id SERIAL PRIMARY KEY,
