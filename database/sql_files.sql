@@ -5,7 +5,11 @@ CREATE TABLE users (
 	user_id SERIAL PRIMARY KEY,
 	username VARCHAR(50) NOT NULL,
 	email VARCHAR(100) NOT NULL,
+<<<<<<< HEAD
 	dietery_preferences TEXT,
+=======
+	dietary_preferences TEXT,
+>>>>>>> 185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
 	profile_picture TEXT
 );
 --insert  sample
@@ -34,7 +38,11 @@ CREATE TABLE Recipes (
     serving_portion INT NOT NULL
 );
 -- Insert sample data into Recipes
+<<<<<<< HEAD
 INSERT INTO Recipes (title, instructions, ingridients_required, prepping_time, serving_portion)
+=======
+INSERT INTO Recipes (title, instructions, ingredients_required, prepping_time, serving_portion)
+>>>>>>> 185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
 VALUES (
     'Steamed Rice',
     '1. Rinse the rice thoroughly.\n2. Add rice and water to a pot.\n3. Bring to a boil, then simmer on low heat with the lid on for 18-20 minutes.\n4. Let it rest for 5 minutes before serving.',
@@ -46,7 +54,11 @@ VALUES (
 CREATE TABLE UsageLogs (
     log_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id),
+<<<<<<< HEAD
     ingredient_id INT REFERENCES ingredients(ingredients_id),
+=======
+    ingredient_id INT REFERENCES ingredients(ingredient_id),
+>>>>>>> 185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
     quantity_used INT NOT NULL,
     used_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -68,7 +80,11 @@ VALUES (1, 1);
 --create table
 CREATE TABLE RecipeIngredients (
     recipe_id INT REFERENCES Recipes(recipe_id),
+<<<<<<< HEAD
     ingredient_id INT REFERENCES ingredients(ingredients_id),
+=======
+    ingredient_id INT REFERENCES ingredients(ingredient_id),
+>>>>>>> 185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
     quantity_required INT NOT NULL,
     PRIMARY KEY (recipe_id, ingredient_id)
 );
@@ -81,6 +97,7 @@ VALUES
 -- ===============
 -- TEST QUERIES
 -- ===============
+<<<<<<< HEAD
 	
 -- Retrieve all users
 SELECT * FROM Users;
@@ -97,3 +114,21 @@ FROM Recipes AS rec
 JOIN CustomRecipeSuggestions AS sugg ON rec.recipe_id = sugg.recipe_id
 WHERE sugg.user_id = 1;
 
+=======
+--all users	
+SELECT u.username, u.email, i.name AS ingredient_name, i.quantity, i.expiry_date
+FROM Users AS u
+LEFT JOIN Ingredients AS i ON u.user_id = i.owner_id;
+--recipes with ingredients
+SELECT r.title AS recipe_name, ri.quantity_required, i.name AS ingredient_name
+FROM Recipes AS r
+JOIN RecipeIngredients AS ri ON r.recipe_id = ri.recipe_id
+JOIN Ingredients AS i ON ri.ingredient_id = i.ingredient_id
+WHERE r.recipe_id = 1;
+recipe suffestion with ingredient
+SELECT u.username, r.title AS recipe_name, r.instructions
+FROM CustomRecipeSuggestions AS c
+JOIN Recipes AS r ON c.recipe_id = r.recipe_id
+JOIN Users AS u ON c.user_id = u.user_id
+WHERE c.user_id = 1;
+>>>>>>> 185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
