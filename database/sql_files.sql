@@ -132,3 +132,13 @@ JOIN Recipes AS r ON c.recipe_id = r.recipe_id
 JOIN Users AS u ON c.user_id = u.user_id
 WHERE c.user_id = 1;
 >>>>>>> 185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
+
+--Altering the Users table
+-- Step 1: Add the password column to the Users table
+ALTER TABLE Users
+ADD COLUMN password VARCHAR(100);
+
+-- Step 2: Update the password to 'default_password' where it is NULL
+UPDATE Users
+SET password = 'default_password'
+WHERE password IS NULL;
