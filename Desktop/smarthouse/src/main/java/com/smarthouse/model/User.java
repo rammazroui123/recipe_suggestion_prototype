@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users") // Name of the database table
-
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate primary key
     private Long id;
@@ -13,10 +13,10 @@ public class User {
     @Column(nullable = false, unique = true) // Make username unique and required
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false) // Make email required
     private String email;
 
-    @Column(nullable = false) // Enforce NOT NULL
+    @Column(nullable = false) // Enforce NOT NULL for password
     private String password;
 
     // Getters and setters for each field
