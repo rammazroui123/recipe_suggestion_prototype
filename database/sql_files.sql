@@ -77,6 +77,12 @@ CREATE TABLE RecipeIngredients (
 INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity_required)
 VALUES 
     (1, 1, 2);
+
+-- samples
+INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity_required)
+VALUES (2, 3, 3),  
+       (3, 2, 5);  
+
 	
 	
 -- ===============
