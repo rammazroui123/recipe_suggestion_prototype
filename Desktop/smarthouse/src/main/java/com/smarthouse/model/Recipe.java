@@ -27,6 +27,7 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeIngredient> recipeIngredients;
+    private Long id;
 
     // Getters and setters
     public Long getRecipeId() {
@@ -84,4 +85,9 @@ public class Recipe {
     public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

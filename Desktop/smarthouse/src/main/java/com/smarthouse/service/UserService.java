@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -25,5 +26,13 @@ public class UserService {
         logger.info("Adding a new user: {}", user.getUsername());
         return userRepository.save(user);
     }
+
+    // Add the getUserById method
+    public User getUserById(Long id) {
+        logger.info("Fetching user with ID: {}", id);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+    }
 }
+
 

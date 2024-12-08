@@ -28,6 +28,16 @@ public class User {
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
+    // Default constructor
+    public User() {}
+
+    // Parameterized constructor
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     // Getters and setters
     public Long getId() {
         return id;
