@@ -1,12 +1,15 @@
 package com.smarthouse.service;
 
 import com.smarthouse.model.Ingredient;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+
 @Component
+@Profile("!test")
 public class MockRealTimeUpdates {
 
     private final IngredientService ingredientService;

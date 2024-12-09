@@ -4,6 +4,8 @@ import com.smarthouse.model.Recipe;
 import com.smarthouse.model.RecipeIngredient;
 import com.smarthouse.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @GetMapping
-    public List<Recipe> getAllRecipes() {
-        return recipeService.getAllRecipes();
+    public Page<Recipe> getAllRecipes(Pageable pageable) {
+        return recipeService.getAllRecipes(pageable);
     }
 
     @PostMapping

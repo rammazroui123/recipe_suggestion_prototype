@@ -9,14 +9,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+
 @Service
 public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
     // Fetch all ingredients for a specific user
-    public List<Ingredient> getIngredientsForUser(User owner) {
-        return ingredientRepository.findByOwner(owner);
+    public Page<Ingredient> getIngredientsForUser(User owner, Pageable pageable) {
+        return ingredientRepository.findByOwner(owner, pageable);
     }
 
     // Fetch all ingredients (for testing or admin functionality)

@@ -7,6 +7,8 @@ import com.smarthouse.repository.IngredientRepository;
 import com.smarthouse.repository.RecipeIngredientRepository;
 import com.smarthouse.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class RecipeService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    public List<Recipe> getAllRecipes() {
-        return recipeRepository.findAll();
+    public Page<Recipe> getAllRecipes(Pageable pageable) {
+        return recipeRepository.findAll(pageable);
     }
 
     public Recipe addRecipe(Recipe recipe) {

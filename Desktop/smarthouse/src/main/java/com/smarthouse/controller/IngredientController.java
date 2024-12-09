@@ -6,6 +6,10 @@ import com.smarthouse.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+
 import java.util.List;
 
 @RestController
@@ -15,10 +19,10 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     @GetMapping
-    public List<Ingredient> getAllIngredientsForUser(@RequestParam Long userId) {
+    public Page<Ingredient> getAllIngredientsForUser(@RequestParam Long userId, Pageable pageable) {
         User user = new User();
         user.setId(userId);
-        return ingredientService.getIngredientsForUser(user);
+        return ingredientService.getIngredientsForUser(user, pageable);
     }
 
     @PostMapping

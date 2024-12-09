@@ -1,17 +1,22 @@
 package com.smarthouse.service;
 
 import com.smarthouse.model.Ingredient;
+import com.smarthouse.model.User;
 import com.smarthouse.repository.IngredientRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class IngredientServiceTest {
+class IngredientServiceTest {
 
     @Mock
     private IngredientRepository ingredientRepository;
@@ -24,18 +29,21 @@ public class IngredientServiceTest {
     }
 
     @Test
-    public void testGetAllIngredients() {
-        Ingredient ingredient1 = new Ingredient();
-        ingredient1.setName("Sugar");
+    void getIngredientsForUser_ShouldReturnPaginatedIngredients() {
+        // Arrange
+        User user = new User();
+        user.setId(1L);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName("Salt");
+        Page<Ingredient> ingredientPage = new PageImpl<>(Collections.singletonList(ingredient));
+        when(ingredientRepository.findByOwner(user, PageRequest.of(0, 10))).thenReturn(ingredientPage);
 
-        Ingredient ingredient2 = new Ingredient();
-        ingredient2.setName("Salt");
+        // Act
+        Page<Ingredient> result = ingredientService.getIngredientsForUser(user, PageRequest.of(0, 10));
 
-        when(ingredientRepository.findAll()).thenReturn(Arrays.asList(ingredient1, ingredient2));
-
-        List<Ingredient> ingredients = ingredientService.getAllIngredients();
-
-        assertNotNull(ingredients);
-        assertEquals(2, ingredients.size());
+        // Assert
+        assertEquals(1, result.getTotalElements());
+        assertEquals("Salt", result.getContent().get(0).getName());
+        verify(ingredientRepository, times(1)).findByOwner(user, PageRequest.of(0, 10));
     }
 }

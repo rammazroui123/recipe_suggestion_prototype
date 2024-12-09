@@ -2,20 +2,21 @@ package com.smarthouse.service;
 
 import com.smarthouse.model.Recipe;
 import com.smarthouse.repository.RecipeRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class RecipeServiceTest {
+class RecipeServiceTest {
 
     @Mock
     private RecipeRepository recipeRepository;
@@ -23,68 +24,51 @@ public class RecipeServiceTest {
     @InjectMocks
     private RecipeService recipeService;
 
-    @BeforeEach
-    public void setUp() {
+    public RecipeServiceTest() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testGetAllRecipes() {
-        Recipe recipe1 = new Recipe();
-        recipe1.setTitle("Steamed Rice");
+    void getAllRecipes_ShouldReturnPaginatedRecipes() {
+        // Arrange
+        Recipe recipe = new Recipe();
+        recipe.setTitle("Test Recipe");
+        Page<Recipe> recipePage = new PageImpl<>(Collections.singletonList(recipe));
+        when(recipeRepository.findAll(PageRequest.of(0, 10))).thenReturn(recipePage);
 
-        Recipe recipe2 = new Recipe();
-        recipe2.setTitle("Fried Rice");
+        // Act
+        Page<Recipe> result = recipeService.getAllRecipes(PageRequest.of(0, 10));
 
-        when(recipeRepository.findAll()).thenReturn(Arrays.asList(recipe1, recipe2));
-
-        List<Recipe> recipes = recipeService.getAllRecipes();
-
-        assertNotNull(recipes);
-        assertEquals(2, recipes.size());
-        assertEquals("Steamed Rice", recipes.get(0).getTitle());
-        verify(recipeRepository, times(1)).findAll();
+        // Assert
+        assertEquals(1, result.getTotalElements());
+        assertEquals("Test Recipe", result.getContent().get(0).getTitle());
+        verify(recipeRepository, times(1)).findAll(PageRequest.of(0, 10));
     }
 
     @Test
-    public void testAddRecipe() {
+    void addRecipe_ShouldSaveRecipe() {
+        // Arrange
         Recipe recipe = new Recipe();
-        recipe.setTitle("Pasta");
+        recipe.setTitle("New Recipe");
+        when(recipeRepository.save(recipe)).thenReturn(recipe);
 
-        when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
+        // Act
+        Recipe result = recipeService.addRecipe(recipe);
 
-        Recipe savedRecipe = recipeService.addRecipe(recipe);
-
-        assertNotNull(savedRecipe);
-        assertEquals("Pasta", savedRecipe.getTitle());
+        // Assert
+        assertNotNull(result);
+        assertEquals("New Recipe", result.getTitle());
         verify(recipeRepository, times(1)).save(recipe);
     }
 
     @Test
-    public void testFindRecipeById() {
-        Recipe recipe = new Recipe();
-        recipe.setId(1L);
-        recipe.setTitle("Steamed Rice");
+    void findRecipeById_ShouldThrowException_WhenNotFound() {
+        // Arrange
+        when(recipeRepository.findById(1L)).thenReturn(Optional.empty());
 
-        when(recipeRepository.findById(1L)).thenReturn(Optional.of(recipe));
-
-        Recipe foundRecipe = recipeService.findRecipeById(1L);
-
-        assertNotNull(foundRecipe);
-        assertEquals("Steamed Rice", foundRecipe.getTitle());
+        // Act & Assert
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> recipeService.findRecipeById(1L));
+        assertEquals("Recipe not found", exception.getMessage()); // Update the expected message
         verify(recipeRepository, times(1)).findById(1L);
     }
-
-    @Test
-    public void testFindRecipeById_NotFound() {
-        when(recipeRepository.findById(999L)).thenReturn(Optional.empty());
-
-        // Assert that the service throws an exception
-        assertThrows(RuntimeException.class, () -> {
-            recipeService.findRecipeById(999L); // 999L is an ID that does not exist
-        });
-    }
-
-
-
 }

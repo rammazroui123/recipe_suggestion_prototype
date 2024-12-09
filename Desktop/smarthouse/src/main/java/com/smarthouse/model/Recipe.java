@@ -17,9 +17,6 @@ public class Recipe {
     private String instructions;
 
     @Column(nullable = false)
-    private String ingredientsRequired;
-
-    @Column(nullable = false)
     private Integer preppingTime;
 
     @Column(nullable = false)
@@ -27,7 +24,6 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeIngredient> recipeIngredients;
-    private Long id;
 
     // Getters and setters
     public Long getRecipeId() {
@@ -54,13 +50,8 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public String getIngredientsRequired() {
-        return ingredientsRequired;
-    }
 
-    public void setIngredientsRequired(String ingredientsRequired) {
-        this.ingredientsRequired = ingredientsRequired;
-    }
+
 
     public Integer getPreppingTime() {
         return preppingTime;
@@ -84,10 +75,6 @@ public class Recipe {
 
     public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 }
