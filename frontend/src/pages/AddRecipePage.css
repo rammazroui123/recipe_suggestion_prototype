@@ -1,0 +1,67 @@
+/* General Styles for the Page */
+.add-recipe-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8faff; /* Light blue background */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styles */
+  .add-recipe-header {
+    margin-bottom: 30px;
+  }
+  
+  .add-recipe-header h1 {
+    font-size: 2.5rem;
+    color: #4c82d5; /* Vibrant blue */
+    margin-bottom: 10px;
+  }
+  
+  .add-recipe-header p {
+    font-size: 1.2rem;
+    color: #666; /* Subtle gray text */
+  }
+  
+  /* Error Message Styles */
+  .error-message {
+    color: #ff4d4d; /* Bright red for errors */
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Loading Message Styles */
+  .loading-message p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4c82d5; /* Vibrant blue */
+  }
+  
+  /* Form Container */
+  .form-container {
+    background-color: #ffffff; /* White background for form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Buttons */
+  button {
+    background-color: #4c82d5; /* Vibrant blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #375d9c; /* Slightly darker blue */
+    transform: scale(1.05); /* Subtle zoom on hover */
+  }
+  
