@@ -1,0 +1,46 @@
+/* Container for the recipe list */
+.recipe-list-container {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to bottom, #e7ffe7, #c8f5c8);
+    min-height: 100vh;
+  }
+  
+  /* Grid layout for recipe cards */
+  .recipe-card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Recipe card styles */
+  .recipe-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  /* Hover effect for cards */
+  .recipe-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Recipe card title */
+  .recipe-card h2 {
+    color: #2e7d32;
+    margin-bottom: 10px;
+  }
+  
+  /* Recipe card details */
+  .recipe-card p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
