@@ -1,0 +1,85 @@
+/* Container for centering the search bar */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0; /* Adds spacing above and below */
+    padding: 0 1rem; /* Adds padding for smaller screens */
+    width: 100%;
+    box-sizing: border-box; /* Includes padding and border in width calculation */
+    position: relative; /* To position clear button inside the container */
+  }
+  
+  /* Styling for the search bar input */
+  .search-bar {
+    width: 100%; /* Full width for responsive design */
+    max-width: 400px; /* Limits the width on larger screens */
+    padding: 0.5rem 1rem; /* Adds internal spacing */
+    font-size: 1rem; /* Sets a readable font size */
+    color: #333; /* Text color */
+    border: 1px solid #ccc; /* Default border */
+    border-radius: 4px; /* Rounds the edges */
+    background-color: #fff; /* White background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  }
+  
+  /* Change appearance on focus */
+  .search-bar:focus {
+    border-color: #007bff; /* Changes the border color to blue */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a blue glow */
+    outline: none; /* Removes the default outline */
+  }
+  
+  /* Placeholder text styling */
+  .search-bar::placeholder {
+    color: #999; /* Light gray placeholder text */
+    font-style: italic; /* Italicized text for distinction */
+  }
+  
+  /* Hover effect for the search bar */
+  .search-bar:hover {
+    border-color: #007bff; /* Changes border color on hover */
+  }
+  
+  /* Error state styling */
+  .search-bar.error {
+    border-color: #dc3545; /* Red border for error */
+    background-color: #f8d7da; /* Light red background for error */
+  }
+  
+  /* Error message text */
+  .error-message {
+    color: #dc3545; /* Red text for error messages */
+    font-size: 0.9rem; /* Slightly smaller than normal text */
+    margin-top: 0.5rem; /* Adds space between input and error text */
+    text-align: center;
+  }
+  
+  /* Clear button styling */
+  .clear-button {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: -2rem; /* Adjust position relative to the input field */
+    position: absolute;
+    right: 1rem;
+  }
+  
+  .clear-button:hover {
+    color: #007bff; /* Changes color on hover */
+  }
+  
+  .clear-button:focus {
+    outline: none; /* Removes outline on focus */
+  }
+  
+  /* Responsive design for small screens */
+  @media (max-width: 576px) {
+    .search-bar {
+      font-size: 0.9rem; /* Smaller font size for smaller screens */
+      padding: 0.4rem 0.8rem; /* Adjust padding */
+    }
+  }
+  

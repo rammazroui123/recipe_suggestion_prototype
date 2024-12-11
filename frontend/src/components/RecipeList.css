@@ -1,0 +1,65 @@
+/* Container for the list of recipes */
+.recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  /* Individual recipe card */
+  .recipe-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  /* Add hover effect to recipe cards */
+  .recipe-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Image inside the recipe card */
+  .recipe-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Recipe title */
+  .recipe-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Recipe description */
+  .recipe-card p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  /* Button inside the recipe card */
+  .recipe-card button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  /* Button hover effect */
+  .recipe-card button:hover {
+    background-color: #0056b3;
+  }
+  
