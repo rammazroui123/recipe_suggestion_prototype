@@ -89,11 +89,10 @@ Open the frontend:
 Navigate to http://localhost:3000 in your browser.
 Team Members
 
-[Your Name]: Backend Development, Database Design
-Collaborator 1: Frontend Development
-Collaborator 2: API Integration
-Collaborator 3: Testing & Debugging
-Milestones
+Naaz: Backend Development
+Tawana and Ramah: Frontend Development
+Deloris: Database Design
+
 
 Implement backend image recognition logic and test.
 Develop database schema and API endpoints.
