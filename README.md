@@ -31,7 +31,7 @@ This project addresses the challenge of reducing food waste and improving meal p
 
 **Tech Stack**
 - Backend: Node.js, Python Flask
-- Database: MongoDB (NoSQL)
+- Database:postgreSQL
 - Frontend: React.js (or any preferred framework)
 - Third-Party API: Spoonacular API
 
@@ -43,7 +43,7 @@ The system integrates the following components:
    - Transfers data to the SSH Cloud via SSH Hub.
 
 2. SSH Cloud:
-   - Stores data in a NoSQL database.
+   - Stores data in a postgreSQL database.
    - Runs the recipe suggestion algorithm using the Spoonacular API.
 
 3. SSH App and Console Table:
@@ -52,8 +52,8 @@ The system integrates the following components:
 **How to Run the Prototype**
 
 Prerequisites:
-- MongoDB installed and running locally or on a cloud service.
-- Node.js and npm installed.
+- postgreSQL installed and running locally or on a cloud service.
+- Node.js, npm and React installed.
 - API Key for Spoonacular API.
 
 Steps:
@@ -66,7 +66,7 @@ Steps:
 
 3. Set up environment variables:
    - Create a .env file in the root directory and add:
-     MONGO_URI=<your-mongodb-uri>
+     POSTGRES_URI=<your-postgresql-uri>
      SPOONACULAR_API_KEY=<your-api-key>
 
 4. Run the backend server:

@@ -34,7 +34,10 @@ CREATE TABLE Recipes (
     serving_portion INT NOT NULL
 );
 -- Insert sample data into Recipes
+<<<<<<< HEAD
 
+=======
+>>>>>>> 738fd72b6e3353c441309051a5a8327f3150dc4b
 INSERT INTO Recipes (title, instructions, ingredients_required, prepping_time, serving_portion)
 VALUES (
     'Steamed Rice',
@@ -88,7 +91,10 @@ VALUES (2, 3, 3),
 -- ===============
 -- TEST QUERIES
 -- ===============
+<<<<<<< HEAD
 
+=======
+>>>>>>> 738fd72b6e3353c441309051a5a8327f3150dc4b
 --all users	
 SELECT u.username, u.email, i.name AS ingredient_name, i.quantity, i.expiry_date
 FROM Users AS u
