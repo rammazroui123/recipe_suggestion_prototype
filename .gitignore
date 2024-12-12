@@ -114,7 +114,6 @@ bin/
 .DS_Store
  backend
 
-# Ignore Database Directory
-/database/
+
  0b1df6b8a7c23acb0442f5f75db264e750c0186f
  185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
