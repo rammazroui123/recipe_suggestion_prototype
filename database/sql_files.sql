@@ -76,6 +76,12 @@ CREATE TABLE RecipeIngredients (
 INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity_required)
 VALUES 
     (1, 1, 2);
+
+-- samples
+INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity_required)
+VALUES (2, 3, 3),  
+       (3, 2, 5);  
+
 	
 	
 -- ===============
@@ -97,3 +103,18 @@ FROM CustomRecipeSuggestions AS c
 JOIN Recipes AS r ON c.recipe_id = r.recipe_id
 JOIN Users AS u ON c.user_id = u.user_id
 WHERE c.user_id = 1;
+
+--Altering the Users table
+-- Step 1: Add the password column to the Users table
+ALTER TABLE Users
+ADD COLUMN password VARCHAR(100);
+
+-- Step 2: Update the password to 'default_password' where it is NULL
+UPDATE Users
+SET password = 'default_password'
+WHERE password IS NULL;
+
+ALTER TABLE customrecipesuggestions RENAME TO custom_recipe_suggestions;
+
+ALTER TABLE recipeingredients RENAME TO recipe_ingredients;
+
