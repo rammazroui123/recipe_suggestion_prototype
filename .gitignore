@@ -81,7 +81,7 @@ scripts/logs/
 
 # Node Modules (if front-end exists)
 node_modules/
-<<<<<<< HEAD
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -199,7 +199,6 @@ scripts/logs/
 
 # Node Modules (if front-end exists)
 node_modules/
-<<<<<<< HEAD
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
