@@ -115,3 +115,8 @@ ADD COLUMN password VARCHAR(100);
 UPDATE Users
 SET password = 'default_password'
 WHERE password IS NULL;
+
+ALTER TABLE customrecipesuggestions RENAME TO custom_recipe_suggestions;
+
+ALTER TABLE recipeingredients RENAME TO recipe_ingredients;
+
