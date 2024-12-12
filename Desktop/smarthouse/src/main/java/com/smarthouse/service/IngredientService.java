@@ -1,27 +1,35 @@
 package com.smarthouse.service;
 
+import com.smarthouse.dto.IngredientDTO;
 import com.smarthouse.model.Ingredient;
 import com.smarthouse.model.User;
 import com.smarthouse.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 
 @Service
 public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    // Fetch all ingredients for a specific user
-    public Page<Ingredient> getIngredientsForUser(User owner, Pageable pageable) {
-        return ingredientRepository.findByOwner(owner, pageable);
+    // Fetch ingredients for a specific user and map to DTO
+    public Page<IngredientDTO> getIngredientsForUser(User owner, Pageable pageable) {
+        return ingredientRepository.findByOwner(owner, pageable)
+                .map(ingredient -> new IngredientDTO(
+                        ingredient.getIngredientId(),
+                        ingredient.getName(),
+                        ingredient.getQuantity(),
+                        ingredient.getExpiryDate().toString(),
+                        ingredient.getOwner().getId(),
+                        ingredient.getOwner().getUsername()
+                ));
     }
 
     // Fetch all ingredients (for testing or admin functionality)
@@ -29,11 +37,21 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    // Add a new ingredient
-    public Ingredient addIngredient(Ingredient ingredient) {
-        return ingredientRepository.save(ingredient);
+    // Fetch expired ingredients for a specific user
+    public List<Ingredient> getExpiredIngredientsForUser(User owner) {
+        return ingredientRepository.findByOwner(owner)
+                .stream()
+                .filter(ingredient -> ingredient.getExpiryDate().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
     }
 
+    // Add a new ingredient with validation
+    public Ingredient addIngredient(Ingredient ingredient) {
+        System.out.println("Attempting to save Ingredient: " + ingredient);
+        Ingredient savedIngredient = ingredientRepository.save(ingredient);
+        System.out.println("Saved Ingredient: " + savedIngredient);
+        return savedIngredient;
+    }
     // Update an existing ingredient
     public Ingredient updateIngredient(Long ingredientId, Ingredient updatedIngredient) {
         return ingredientRepository.findById(ingredientId)
@@ -52,5 +70,10 @@ public class IngredientService {
         }
         ingredientRepository.deleteById(ingredientId);
     }
-}
 
+    // Fetch a specific ingredient by ID
+    public Ingredient findIngredientById(Long ingredientId) {
+        return ingredientRepository.findById(ingredientId)
+                .orElseThrow(() -> new IllegalArgumentException("Ingredient not found with id: " + ingredientId));
+    }
+}

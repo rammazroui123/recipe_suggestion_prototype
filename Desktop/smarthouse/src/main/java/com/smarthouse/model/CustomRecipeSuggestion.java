@@ -1,10 +1,12 @@
 package com.smarthouse.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "CustomRecipeSuggestions")
+@Table(name = "custom_recipe_suggestions")
 public class CustomRecipeSuggestion {
 
     @Id

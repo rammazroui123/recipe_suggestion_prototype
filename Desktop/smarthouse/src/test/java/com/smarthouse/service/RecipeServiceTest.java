@@ -1,5 +1,6 @@
 package com.smarthouse.service;
 
+import com.smarthouse.dto.RecipeDTO;
 import com.smarthouse.model.Recipe;
 import com.smarthouse.repository.RecipeRepository;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,8 @@ class RecipeServiceTest {
         when(recipeRepository.findAll(PageRequest.of(0, 10))).thenReturn(recipePage);
 
         // Act
-        Page<Recipe> result = recipeService.getAllRecipes(PageRequest.of(0, 10));
+        Page<RecipeDTO> result = recipeService.getAllRecipes(PageRequest.of(0, 10));
+
 
         // Assert
         assertEquals(1, result.getTotalElements());

@@ -14,4 +14,8 @@ public interface UsageLogRepository extends JpaRepository<UsageLog, Long> {
     List<UsageLog> findByUser(User user);
 
     List<UsageLog> findByIngredient(Ingredient ingredient);
+
+    // New method to find usage logs by both user and ingredient
+    List<UsageLog> findByUserAndIngredient(User user, Ingredient ingredient);
 }
+

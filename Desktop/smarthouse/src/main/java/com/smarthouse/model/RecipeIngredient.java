@@ -1,6 +1,8 @@
 package com.smarthouse.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+
 
 @Entity
 @Table(name = "recipe_ingredients")
@@ -19,7 +21,18 @@ public class RecipeIngredient {
     private Ingredient ingredient;
 
     @Column(nullable = false)
+    @Min(value = 1, message = "Quantity required must be at least 1")
     private Integer quantityRequired;
+
+    // Default constructor
+    public RecipeIngredient() {}
+
+    // Parameterized constructor
+    public RecipeIngredient(Recipe recipe, Ingredient ingredient, Integer quantityRequired) {
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+        this.quantityRequired = quantityRequired;
+    }
 
     // Getters and setters
     public Long getId() {

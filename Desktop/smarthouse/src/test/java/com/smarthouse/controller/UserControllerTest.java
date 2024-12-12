@@ -43,8 +43,8 @@ class UserControllerTest {
     @Test
     void getAllUsers_ShouldReturnListOfUsers() throws Exception {
         // Arrange
-        userRepository.save(new User("unique_john_doe", "john_unique@example.com", "password123"));
-        userRepository.save(new User("unique_jane_doe", "jane_unique@example.com", "password456"));
+        userRepository.save(new User("unique_john_doe", "john_unique@example.com"));
+        userRepository.save(new User("unique_jane_doe", "jane_unique@example.com"));
 
         // Act & Assert
         mockMvc.perform(get("/api/users")
@@ -60,7 +60,7 @@ class UserControllerTest {
         // Act & Assert
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\":\"new_user\", \"email\":\"new_user@example.com\", \"password\":\"password123\"}"))
+                        .content("{\"username\":\"new_user\", \"email\":\"new_user@example.com\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("new_user"));
     }

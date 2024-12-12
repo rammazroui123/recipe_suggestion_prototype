@@ -11,5 +11,9 @@ import java.util.List;
 
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
+    // For paginated results
     Page<Ingredient> findByOwner(User owner, Pageable pageable);
+
+    // For non-paginated results
+    List<Ingredient> findByOwner(User owner);
 }

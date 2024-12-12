@@ -29,7 +29,7 @@ class UserServiceTest {
     @Test
     void addUser_ShouldAddUser() {
         // Arrange
-        User user = new User("john_doe", "john@example.com", "password123");
+        User user = new User("john_doe", "john@example.com");
         when(userRepository.save(user)).thenReturn(user);
 
         // Act
@@ -44,12 +44,12 @@ class UserServiceTest {
     @Test
     void getAllUsers_ShouldReturnListOfUsers() {
         // Arrange
-        User user1 = new User("john_doe", "john@example.com", "password123");
-        User user2 = new User("jane_doe", "jane@example.com", "password456");
+        User user1 = new User("john_doe", "john@example.com");
+        User user2 = new User("jane_doe", "jane@example.com");
         when(userRepository.findAll()).thenReturn(Arrays.asList(user1, user2));
 
         // Act
-        List<User> users = userService.getAllUsers();
+        List<User> users = userService.getAllUserEntities();
 
         // Assert
         assertEquals(2, users.size());
@@ -59,11 +59,11 @@ class UserServiceTest {
     @Test
     void getUserById_ShouldReturnUser_WhenUserExists() {
         // Arrange
-        User user = new User("john_doe", "john@example.com", "password123");
+        User user = new User("john_doe", "john@example.com");
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         // Act
-        User result = userService.getUserById(1L);
+        User result = userService.getUserEntityById(1L);
 
         // Assert
         assertNotNull(result);

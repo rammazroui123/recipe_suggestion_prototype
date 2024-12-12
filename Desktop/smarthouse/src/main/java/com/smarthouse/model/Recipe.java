@@ -1,6 +1,10 @@
 package com.smarthouse.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 @Entity
@@ -11,15 +15,25 @@ public class Recipe {
     private Long recipeId;
 
     @Column(nullable = false)
+    @NotBlank(message = "Recipe title must not be blank")
     private String title;
 
     @Column(nullable = false)
+    @Size(min = 10, message = "Instructions must be at least 10 characters")
     private String instructions;
 
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private List<CustomRecipeSuggestion> suggestions;
+
+
+
     @Column(nullable = false)
+    @Min(value = 1, message = "Prepping time must be greater than 0")
     private Integer preppingTime;
 
     @Column(nullable = false)
+    @Min(value = 1, message = "Serving portion must be greater than 0")
     private Integer servingPortion;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)

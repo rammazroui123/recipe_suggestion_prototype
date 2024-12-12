@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.List;
+
 @Schema(description = "User entity representing a system user")
 @Entity
 @Table(name = "users") // Name of the database table
@@ -24,18 +26,41 @@ public class User {
     @Email(message = "Invalid email format")
     private String email;
 
-    @Column(nullable = false) // Enforce NOT NULL
-    @Size(min = 6, message = "Password must be at least 6 characters")
-    private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CustomRecipeSuggestion> suggestions;
+
+    @Column(nullable = true)
+    private String dietaryPreferences;
+
+    @Column(nullable = true)
+    private String profilePicture;
+
+    // Getters and setters
+    public String getDietaryPreferences() {
+        return dietaryPreferences;
+    }
+
+    public void setDietaryPreferences(String dietaryPreferences) {
+        this.dietaryPreferences = dietaryPreferences;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
 
     // Default constructor
     public User() {}
 
     // Parameterized constructor
-    public User(String username, String email, String password) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
-        this.password = password;
     }
 
     // Getters and setters
@@ -63,11 +88,4 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

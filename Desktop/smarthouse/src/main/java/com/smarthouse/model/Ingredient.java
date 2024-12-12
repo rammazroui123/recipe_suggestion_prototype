@@ -1,6 +1,10 @@
 package com.smarthouse.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDate;
 
 @Entity
@@ -11,12 +15,15 @@ public class Ingredient {
     private Long ingredientId;
 
     @Column(nullable = false)
+    @NotBlank(message = "Ingredient name must not be blank")
     private String name;
 
     @Column(nullable = false)
+    @Min(value = 1, message = "Quantity must be at least 1")
     private Integer quantity;
 
     @Column(nullable = false)
+    @Future(message = "Expiry date must be in the future")
     private LocalDate expiryDate;
 
     @ManyToOne

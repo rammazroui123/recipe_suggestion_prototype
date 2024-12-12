@@ -1,5 +1,6 @@
 package com.smarthouse.service;
 
+import com.smarthouse.dto.RecipeDTO;
 import com.smarthouse.model.Ingredient;
 import com.smarthouse.model.Recipe;
 import com.smarthouse.model.RecipeIngredient;
@@ -18,15 +19,23 @@ public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    // Fetch paginated recipes and map to RecipeDTO
+    public Page<RecipeDTO> getAllRecipes(Pageable pageable) {
+        return recipeRepository.findAll(pageable)
+                .map(recipe -> new RecipeDTO(
+                        recipe.getRecipeId(),
+                        recipe.getTitle(),
+                        recipe.getInstructions(),
+                        recipe.getPreppingTime(),
+                        recipe.getServingPortion()
+                ));
+    }
+
     @Autowired
     private RecipeIngredientRepository recipeIngredientRepository;
 
     @Autowired
     private IngredientRepository ingredientRepository;
-
-    public Page<Recipe> getAllRecipes(Pageable pageable) {
-        return recipeRepository.findAll(pageable);
-    }
 
     public Recipe addRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
@@ -36,29 +45,34 @@ public class RecipeService {
         return recipeIngredientRepository.save(recipeIngredient);
     }
 
-    public Recipe findRecipeById(Long recipeId) {
-        return recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new RuntimeException("Recipe not found"));
+    public RecipeDTO findRecipeById(Long recipeId) {
+        Recipe recipe = recipeRepository.findByIdWithIngredients(recipeId)
+                .orElseThrow(() -> new RuntimeException("Recipe not found with ID: " + recipeId));
+        return new RecipeDTO(
+                recipe.getRecipeId(),
+                recipe.getTitle(),
+                recipe.getInstructions(),
+                recipe.getPreppingTime(),
+                recipe.getServingPortion()
+        );
+    }
+
+    public Recipe findRecipeEntityById(Long recipeId) {
+        return recipeRepository.findByIdWithIngredients(recipeId)
+                .orElseThrow(() -> new RuntimeException("Recipe not found with ID: " + recipeId));
     }
 
 
     public void linkIngredientToRecipe(Long recipeId, Long ingredientId, Integer quantityRequired) {
-        // Fetch the Recipe entity
         Recipe recipe = recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new RuntimeException("Recipe not found"));
-
-        // Fetch the Ingredient entity
+                .orElseThrow(() -> new IllegalArgumentException("Recipe not found"));
         Ingredient ingredient = ingredientRepository.findById(ingredientId)
-                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Ingredient not found"));
 
-        // Create and save the RecipeIngredient entity
-        RecipeIngredient recipeIngredient = new RecipeIngredient();
-        recipeIngredient.setRecipe(recipe);
-        recipeIngredient.setIngredient(ingredient);
-        recipeIngredient.setQuantityRequired(quantityRequired);
-
+        RecipeIngredient recipeIngredient = new RecipeIngredient(recipe, ingredient, quantityRequired);
         recipeIngredientRepository.save(recipeIngredient);
     }
+
 
 
 }

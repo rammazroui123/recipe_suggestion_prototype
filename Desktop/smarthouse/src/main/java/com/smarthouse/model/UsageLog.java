@@ -1,10 +1,12 @@
 package com.smarthouse.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "usage_logs")
+@Table(name = "usagelogs")
 public class UsageLog {
 
     @Id
@@ -20,6 +22,7 @@ public class UsageLog {
     private Ingredient ingredient; // The ingredient used
 
     @Column(nullable = false)
+    @Min(value = 1, message = "Quantity used must be at least 1")
     private Integer quantityUsed; // The quantity used
 
     @Column(nullable = false)

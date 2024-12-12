@@ -1,5 +1,6 @@
 package com.smarthouse.service;
 
+import com.smarthouse.dto.IngredientDTO;
 import com.smarthouse.model.Ingredient;
 import com.smarthouse.model.User;
 import com.smarthouse.repository.IngredientRepository;
@@ -39,7 +40,8 @@ class IngredientServiceTest {
         when(ingredientRepository.findByOwner(user, PageRequest.of(0, 10))).thenReturn(ingredientPage);
 
         // Act
-        Page<Ingredient> result = ingredientService.getIngredientsForUser(user, PageRequest.of(0, 10));
+        Page<IngredientDTO> result = ingredientService.getIngredientsForUser(user, PageRequest.of(0, 10));
+
 
         // Assert
         assertEquals(1, result.getTotalElements());
