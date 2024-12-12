@@ -21,9 +21,17 @@ Provide a seamless interface for recipe access via the SSH App and Console Table
 Enable communication between SSH Cloud, Camera, and Hub for smooth operation.
 Non-Goals
 
+ backend-work
 The system will not include grocery shopping features or price comparisons.
 No AI-based learning for recipe suggestions; the system relies on straightforward algorithms.
 Tech Stack
+
+**Tech Stack**
+- Backend: Node.js, Python Flask
+- Database:postgreSQL
+- Frontend: React.js (or any preferred framework)
+- Third-Party API: Spoonacular API
+ main
 
 Backend: Node.js, Python Flask
 Database:postgreSQL
@@ -33,7 +41,9 @@ System Architecture
 
 The system integrates the following components:
 
+backend-work
 SSH Camera:
+
 
 Captures fridge contents using motion sensors.
 Transfers data to the SSH Cloud via SSH Hub.
@@ -47,13 +57,25 @@ Displays recipe suggestions and logs in an intuitive interface.
 How to Run the Prototype
 
 Prerequisites:
+backend-work
+- postgreSQL installed and running locally or on a cloud service.
+- Node.js, npm and React installed.
+- API Key for Spoonacular API.
+main
 
 postgreSQL installed and running locally or on a cloud service.
 Node.js, npm and React installed.
 API Key for Spoonacular API.
 Steps:
 
+backend-work
 Clone the repository: git clone https://github.com/.git cd
+
+3. Set up environment variables:
+   - Create a .env file in the root directory and add:
+     POSTGRES_URI=<your-postgresql-uri>
+     SPOONACULAR_API_KEY=<your-api-key>
+main
 
 Install dependencies: npm install
 

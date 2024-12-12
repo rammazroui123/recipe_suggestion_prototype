@@ -1,0 +1,59 @@
+.user-list-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .user-list-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .user-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .user-card {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    text-align: left;
+    transition: transform 0.2s ease;
+  }
+  
+  .user-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .user-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #27ae60;
+  }
+  
+  .user-card p {
+    margin: 5px 0 0 0;
+    font-size: 1rem;
+    color: #34495e;
+  }
+
+  .user-card {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
