@@ -34,7 +34,6 @@ CREATE TABLE Recipes (
     serving_portion INT NOT NULL
 );
 -- Insert sample data into Recipes
-
 INSERT INTO Recipes (title, instructions, ingredients_required, prepping_time, serving_portion)
 VALUES (
     'Steamed Rice',
@@ -88,7 +87,6 @@ VALUES (2, 3, 3),
 -- ===============
 -- TEST QUERIES
 -- ===============
-
 --all users	
 SELECT u.username, u.email, i.name AS ingredient_name, i.quantity, i.expiry_date
 FROM Users AS u

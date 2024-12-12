@@ -1,3 +1,4 @@
+
 # Compiled class file
 *.class
 
@@ -80,8 +81,9 @@ scripts/logs/
 
 # Node Modules (if front-end exists)
 node_modules/
+ database-setup
  HEAD
- HEAD
+ main
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -112,8 +114,10 @@ bin/
 ### Mac OS ###
 .DS_Store
  backend
+ database-setup
 
 # Ignore Database Directory
 /database/
  0b1df6b8a7c23acb0442f5f75db264e750c0186f
  185b4fa (Fixed spelling errors in users table, enhanced test queries, updated recipe and usagelog tables)
+ main
